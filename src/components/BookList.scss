@@ -1,0 +1,12 @@
+.Book-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 380px) {
+  .Book-list {
+    max-width: 80vw; /* Карточка будет занимать всю ширину на экранах менее 380px */
+  }
+}

@@ -1,0 +1,29 @@
+.text-search-input {
+  display: flex;
+  align-items: center;
+}
+
+.text-search-input input {
+  flex: 1;
+  padding: 8px;
+}
+
+.text-search-input .logo-button {
+  padding: 8px 16px;
+  background-color: #691212;
+  color: #fff;
+  border: none;
+  margin-right: 3px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 400px) {
+  .text-search-input {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .text-search-input input {
+    margin-bottom: 10px;
+  }
+}
