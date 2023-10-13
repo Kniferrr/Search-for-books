@@ -6,14 +6,20 @@ const apiKey = "AIzaSyBN5vZMd7ZLarq1gBtBBq64vnTgrU29ovI";
 export async function fetchBooks(
   pageNumber: number,
   query: string,
+  sorting: string = "newest",
+  category: string = "all",
   pageSize: number = 30
 ) {
+  const newQuery =
+    category !== "all" ? `${query}+subject:${category}` : `${query}`;
   try {
     const apiUrl = `${ApiUrl}/volumes`;
     const queryParams = {
-      q: `${query}`,
+      q: newQuery,
       startIndex: (pageNumber - 1) * pageSize,
       maxResults: pageSize,
+      orderBy: sorting,
+
       key: apiKey,
     };
 

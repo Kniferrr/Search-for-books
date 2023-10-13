@@ -8,6 +8,8 @@ interface SearchResultsState {
   totalItems: number;
   SearchValue: string;
   page: number;
+  sorting: string;
+  category: string;
 }
 
 const initialState: SearchResultsState = {
@@ -17,6 +19,8 @@ const initialState: SearchResultsState = {
   totalItems: 0,
   SearchValue: "",
   page: 1,
+  sorting: "newest",
+  category: "all",
 };
 
 const searchResultsSlice = createSlice({
@@ -45,9 +49,14 @@ const searchResultsSlice = createSlice({
       state.isLoading = action.payload;
     },
     setError: (state, action: PayloadAction<string>) => {
-      console.log(action.payload);
       state.error = action.payload;
       state.isLoading = false;
+    },
+    setSorting: (state, action: PayloadAction<string>) => {
+      state.sorting = action.payload;
+    },
+    setCategory: (state, action: PayloadAction<string>) => {
+      state.category = action.payload;
     },
   },
 });
@@ -58,6 +67,8 @@ export const {
   setError,
   setSearchValue,
   AddSearchResults,
+  setSorting,
+  setCategory,
 } = searchResultsSlice.actions;
 
 export default searchResultsSlice.reducer;

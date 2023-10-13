@@ -1,3 +1,7 @@
+.dropdowns {
+  display: flex;
+}
+
 .text-search-input {
   display: flex;
   align-items: center;
@@ -13,7 +17,6 @@
   background-color: #691212;
   color: #fff;
   border: none;
-  margin-right: 3px;
   cursor: pointer;
 }
 
@@ -21,9 +24,15 @@
   .text-search-input {
     flex-direction: column;
     align-items: stretch;
+    width: 90%;
   }
 
   .text-search-input input {
     margin-bottom: 10px;
+  }
+
+  .dropdowns {
+    display: flex;
+    flex-direction: column;
   }
 }

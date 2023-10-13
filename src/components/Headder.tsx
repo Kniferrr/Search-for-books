@@ -1,5 +1,4 @@
-import React, { ChangeEvent } from "react";
-import "./TextSearchInput.scss";
+import React, { ChangeEvent, useEffect } from "react";
 import { fetchBooks } from "../servises/Fetch/FetchBookData";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,15 +8,33 @@ import {
   setSearchValue,
 } from "../store/reducers/searchResultsReducer";
 import { RootState } from "../store/store";
+import { useNavigate } from "react-router-dom";
+import Dropdowns from "./Dropdowns";
+import "./Headder.scss";
 
 const Headder: React.FC = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const totalItems = useSelector(
     (state: RootState) => state.searchResultsSlice.totalItems
   );
   const SearchValue = useSelector(
     (state: RootState) => state.searchResultsSlice.SearchValue
   );
+
+  const sorting = useSelector(
+    (state: RootState) => state.searchResultsSlice.sorting
+  );
+
+  const category = useSelector(
+    (state: RootState) => state.searchResultsSlice.category
+  );
+
+  useEffect(() => {
+    onSearch();
+  }, [sorting, category]);
+
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch(setSearchValue(event.target.value));
   };
@@ -26,9 +43,9 @@ const Headder: React.FC = () => {
     if (SearchValue !== "") {
       try {
         dispatch(setLoading(true));
-        const data = await fetchBooks(1, SearchValue);
+        const data = await fetchBooks(1, SearchValue, sorting, category);
         if (data !== undefined) dispatch(setSearchResults(data));
-        window.history.pushState({}, "#/");
+        navigate("/");
       } catch (error) {
         const errorString = String(error);
         dispatch(setError(errorString));
@@ -57,7 +74,10 @@ const Headder: React.FC = () => {
         />
         <button onClick={onSearch}>Поиск</button>
       </div>
-      <div>{totalItems > 0 ? <p>Found {totalItems} results</p> : <></>}</div>
+      <div className="dropdowns">
+        <Dropdowns />
+        {totalItems > 0 ? <p>Found {totalItems} results</p> : <></>}
+      </div>
     </div>
   );
 };
