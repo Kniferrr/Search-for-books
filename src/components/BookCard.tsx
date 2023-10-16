@@ -1,7 +1,6 @@
-// BookCard.tsx
 import React from "react";
-import "./BookCard.scss";
 import ImgComponent from "./ImgComponent";
+import "./BookCard.scss";
 
 interface BookCardProps {
   title: string;

@@ -1,28 +1,18 @@
-import { render, unmountComponentAtNode } from "react-dom";
-import { act } from "react-dom/test-utils";
+import "@testing-library/jest-dom";
+import { render } from "@testing-library/react";
+import App from "../App";
 import { Provider } from "react-redux";
 import store from "../store/store";
-import App from "../App";
 
-let container: HTMLDivElement | null = null;
-
-beforeEach(() => {
-  container = document.createElement("div");
-  document.body.appendChild(container);
+test("demo", () => {
+  expect(true).toBe(true);
 });
 
-afterEach(() => {
-  unmountComponentAtNode(container!);
-  container!.remove();
-});
-
-it("renders the App component with Redux store", () => {
-  act(() => {
-    render(
-      <Provider store={store}>
-        <App />
-      </Provider>,
-      container
-    );
-  });
+test("Renders the main page", () => {
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+  expect(true).toBeTruthy();
 });

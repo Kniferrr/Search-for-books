@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { setError, setLoading } from "../store/reducers/searchResultsReducer";
-import { fetchBookById } from "../servises/Fetch/FetchBookData";
 import "./BookPage.scss";
 import { Book } from "../types/types";
+import { fetchBookById } from "../servises/Fetch/FetchBookData";
 
 function BookPage() {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ function BookPage() {
         const data = await fetchBookById(id);
         setDataBook(data);
       } else {
-        throw new Error("ID книги не определен");
+        throw new Error("Book ID is not defined");
       }
     } catch (error) {
       const errorString = String(error);
@@ -51,18 +51,18 @@ function BookPage() {
     <div className="book-page">
       <img src={thumbnail} alt={title} />
       <h1>{title}</h1>
-      <p>Дата публикации: {publishedDate}</p>
-      <p>Издатель: {publisher}</p>
-      <p>Количество страниц: {pageCount}</p>
-      <p>Язык: {language}</p>
-      <p>Электронная книга: {isEbook ? "Да" : "Нет"}</p>
+      <p>Publication Date: {publishedDate}</p>
+      <p>Publisher: {publisher}</p>
+      <p>Number of Pages: {pageCount}</p>
+      <p>Language: {language}</p>
+      <p>Is Ebook: {isEbook ? "Yes" : "No"}</p>
       {categories && Array.isArray(categories) && categories.length > 0 && (
-        <p>Категории: {`${categories}, `}</p>
+        <p>Categories: {`${categories}, `}</p>
       )}
       {authors && Array.isArray(authors) && authors.length > 0 && (
-        <p>Авторы: {`${authors}, `}</p>
+        <p>Authors: {`${authors}, `}</p>
       )}
-      {description && <p>Описание: {description}</p>}
+      {description && <p>Description: {description}</p>}
     </div>
   );
 }
