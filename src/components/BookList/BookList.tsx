@@ -1,14 +1,14 @@
 // BookCard.tsx
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store/store";
-import BookCard from "./BookCard";
+import { RootState } from "../../store/store";
+import BookCard from "./BookCard/BookCard";
 import {
   AddSearchResults,
   setError,
   setLoading,
-} from "../store/reducers/searchResultsReducer";
-import { fetchBooks } from "../servises/Fetch/FetchBookData";
+} from "../../store/reducers/searchResultsReducer";
+import { fetchBooks } from "../../servises/Fetch/FetchBookData";
 import "./BookList.scss";
 
 const BookList: React.FC = () => {

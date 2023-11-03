@@ -1,5 +1,5 @@
 import { useState } from "react";
-import LoadingComponent from "./LoadingComponent";
+import LoadingComponent from "../LoadingComponent/LoadingComponent";
 import "./ImgComponent.scss";
 
 interface ImgComponentProps {

@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { setError, setLoading } from "../store/reducers/searchResultsReducer";
-import { fetchBookById } from "../servises/Fetch/FetchBookData";
+import {
+  setError,
+  setLoading,
+} from "../../store/reducers/searchResultsReducer";
+import { fetchBookById } from "../../servises/Fetch/FetchBookData";
 import "./BookPage.scss";
-import { Book } from "../types/types";
+import { Book } from "../../types/types";
+import LoadingComponent from "../LoadingComponent/LoadingComponent";
+import ImgComponent from "../ImgComponent/ImgComponent";
 
 function BookPage() {
   const dispatch = useDispatch();
@@ -31,7 +36,11 @@ function BookPage() {
   }, []);
 
   if (!dataBook) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <LoadingComponent />
+      </div>
+    );
   }
 
   const {
@@ -49,7 +58,12 @@ function BookPage() {
 
   return (
     <div className="book-page">
-      <img src={thumbnail} alt={title} />
+      <div className="book-page-img-container">
+        <div className="book-page-img">
+          <ImgComponent image={thumbnail} />
+        </div>
+      </div>
+
       <h1>{title}</h1>
       <p>Дата публикации: {publishedDate}</p>
       <p>Издатель: {publisher}</p>

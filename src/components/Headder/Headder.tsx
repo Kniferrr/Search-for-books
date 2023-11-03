@@ -1,14 +1,14 @@
 import React, { ChangeEvent } from "react";
-import "./TextSearchInput.scss";
-import { fetchBooks } from "../servises/Fetch/FetchBookData";
+import "./Headder.scss";
+import { fetchBooks } from "../../servises/Fetch/FetchBookData";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setError,
   setLoading,
   setSearchResults,
   setSearchValue,
-} from "../store/reducers/searchResultsReducer";
-import { RootState } from "../store/store";
+} from "../../store/reducers/searchResultsReducer";
+import { RootState } from "../../store/store";
 
 const Headder: React.FC = () => {
   const dispatch = useDispatch();
@@ -45,8 +45,8 @@ const Headder: React.FC = () => {
   return (
     <div className="Headder">
       <div className="text-search-input">
-        <a href={`#`}>
-          <div className="logo-button">Logo</div>
+        <a href={`#`} className="logo-button">
+          <div>Logo</div>
         </a>
         <input
           type="text"

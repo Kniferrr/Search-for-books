@@ -1,7 +1,7 @@
 // BookCard.tsx
 import React from "react";
 import "./BookCard.scss";
-import ImgComponent from "./ImgComponent";
+import ImgComponent from "../../ImgComponent/ImgComponent";
 
 interface BookCardProps {
   title: string;
@@ -20,7 +20,12 @@ const BookCard: React.FC<BookCardProps> = ({
 }) => (
   <div className="book-card">
     <a href={`#/book/${id}`}>
-      <ImgComponent image={image} />
+      <div className="book-card-img-container">
+        <div className="book-card-img">
+          <ImgComponent image={image} />
+        </div>
+      </div>
+
       <h2>{title}</h2>
       <p>{category}</p>
       <p>Авторы: {authors.join(", ")}</p>
