@@ -17,7 +17,7 @@ const initialState: mainReducerState = {
   isLoading: false,
   error: null,
   totalItems: 0,
-  SearchValue: "",
+  SearchValue: "JavaScript",
   page: 1,
   sorting: "newest",
   category: "all",
