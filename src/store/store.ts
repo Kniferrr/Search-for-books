@@ -1,13 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import searchResultsSlice from "./reducers/searchResultsReducer";
-import selectedBookSlice from "./reducers/selectedBookReducer";
-import searchRequestSlice from "./reducers/searchRequestReducer";
+import mainReducer from "./reducers/mainReducer";
 
 const store = configureStore({
   reducer: {
-    searchResultsSlice: searchResultsSlice,
-    selectedBookSlice: selectedBookSlice,
-    searchRequestSlice: searchRequestSlice,
+    mainReducer: mainReducer,
   },
 });
 

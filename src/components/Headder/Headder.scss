@@ -17,7 +17,11 @@
   border-radius: 4px;
 }
 
-@media screen and (max-width: 400px) {
+.dropdowns {
+  display: flex;
+}
+
+@media screen and (max-width: 440px) {
   .text-search-input {
     flex-direction: column;
     align-items: stretch;

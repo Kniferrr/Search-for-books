@@ -1,38 +1,19 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import {
-  setError,
-  setLoading,
-} from "../../store/reducers/searchResultsReducer";
-import { fetchBookById } from "../../servises/Fetch/FetchBookData";
 import "./BookPage.scss";
 import { Book } from "../../types/types";
 import LoadingComponent from "../LoadingComponent/LoadingComponent";
 import ImgComponent from "../ImgComponent/ImgComponent";
+import { loadBookData } from "../../helpers/SearchHelper";
 
 function BookPage() {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { id = "1" } = useParams();
   const [dataBook, setDataBook] = useState<Book | null>(null);
 
-  const loadBookData = async () => {
-    try {
-      if (id) {
-        dispatch(setLoading(true));
-        const data = await fetchBookById(id);
-        setDataBook(data);
-      } else {
-        throw new Error("ID книги не определен");
-      }
-    } catch (error) {
-      const errorString = String(error);
-      dispatch(setError(errorString));
-    }
-  };
-
   useEffect(() => {
-    loadBookData();
+    loadBookData(dispatch, id, setDataBook);
   }, []);
 
   if (!dataBook) {
@@ -55,7 +36,7 @@ function BookPage() {
     saleInfo: { isEbook },
     volumeInfo: { categories, authors, description },
   } = dataBook;
-
+  console.log(dataBook);
   return (
     <div className="book-page">
       <div className="book-page-img-container">
@@ -63,20 +44,21 @@ function BookPage() {
           <ImgComponent image={thumbnail} />
         </div>
       </div>
-
       <h1>{title}</h1>
-      <p>Дата публикации: {publishedDate}</p>
-      <p>Издатель: {publisher}</p>
-      <p>Количество страниц: {pageCount}</p>
-      <p>Язык: {language}</p>
-      <p>Электронная книга: {isEbook ? "Да" : "Нет"}</p>
+      <p>Publication Date: {publishedDate}</p>
+      <p>Publisher: {publisher}</p>
+      <p>Number of Pages: {pageCount}</p>
+      <p>Language: {language}</p>
+      <p>Electronic Book: {isEbook ? "Yes" : "No"}</p>
       {categories && Array.isArray(categories) && categories.length > 0 && (
-        <p>Категории: {`${categories}, `}</p>
+        <p>Categories: {`${categories}, `}</p>
       )}
       {authors && Array.isArray(authors) && authors.length > 0 && (
-        <p>Авторы: {`${authors}, `}</p>
+        <p>Authors: {`${authors}, `}</p>
       )}
-      {description && <p>Описание: {description}</p>}
+      {description && (
+        <p>Description: {description.replace(/<[^>]*>?/g, "")}</p>
+      )}
     </div>
   );
 }
