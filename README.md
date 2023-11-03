@@ -1,4 +1,5 @@
 # Search for books
 
-React + TypeScript + Redux
+https://kniferrr.github.io/Search-for-books/
+
 # Search-for-books
